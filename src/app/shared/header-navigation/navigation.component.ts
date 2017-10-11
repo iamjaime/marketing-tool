@@ -1,5 +1,7 @@
 import { Component, AfterViewInit } from '@angular/core';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'ap-navigation',
@@ -9,7 +11,7 @@ export class NavigationComponent implements AfterViewInit {
 	name:string;
   	showHide:boolean;
   
-  	constructor() {
+  	constructor(private router: Router) {
     	this.showHide = true;
   	}
   
@@ -17,6 +19,12 @@ export class NavigationComponent implements AfterViewInit {
     	this.showHide = !this.showHide;
   	}
     
+      onLoggedout() {
+        localStorage.removeItem('isLoggedin');
+        localStorage.clear();
+        console.log(localStorage);
+        this.router.navigate(['/login']);
+    }
     ngAfterViewInit() {
 
         $(function () {

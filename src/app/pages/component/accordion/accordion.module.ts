@@ -10,7 +10,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 const routes: Routes = [{
 	path: '',
 	data: {
-      title: 'Accordion',
+      title: 'Reviews',
       urls: [{title: 'Dashboard', url: '/'},{title: 'ngComponent'},{title: 'Accordion'}]
     },
 	component: NgbdAccordionBasic
