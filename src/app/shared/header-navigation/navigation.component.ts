@@ -20,7 +20,7 @@ export class NavigationComponent implements AfterViewInit {
   	}
     
       onLoggedout() {
-        localStorage.removeItem('isLoggedin');
+        localStorage.removeItem('token');
         localStorage.clear();
         console.log(localStorage);
         this.router.navigate(['/login']);
