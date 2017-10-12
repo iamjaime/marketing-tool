@@ -5,6 +5,7 @@ import {environment } from '../../environments/environment';
 import { AuthService } from "angular4-social-login";
 import { FacebookLoginProvider, GoogleLoginProvider } from "angular4-social-login";
  
+import { SocialUser } from "angular4-social-login";
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
@@ -13,9 +14,26 @@ import { FacebookLoginProvider, GoogleLoginProvider } from "angular4-social-logi
 export class LoginComponent implements OnInit, AfterViewInit {
     resultado:any;
     User:any;
-    constructor(public http: Http,public router: Router ,private authService: AuthService ) {}
+    private user1: SocialUser;
+    private loggedIn: boolean;
+    constructor(public http: Http,public router: Router ,private authService: AuthService, ) {}
 
-    ngOnInit() {}
+    ngOnInit() {
+        this.authService.authState.subscribe((user) => {
+            this.user1 = user;
+            console.log(this.user1);
+            this.loggedIn = (user != null);
+              
+            if(this.loggedIn===true){
+                 
+                
+                    localStorage.setItem('token', 'true');   
+                    this.router.navigate(['/starter']);
+                
+                
+            }
+          });
+    }
 
     ngAfterViewInit() {
         $(function() {
@@ -48,19 +66,10 @@ export class LoginComponent implements OnInit, AfterViewInit {
         //console.log( this.resultado.access_token  );
         localStorage.setItem('token', this.resultado.access_token);         
         console.log(localStorage);
-        let headers = new Headers();
-        let access_token = localStorage.getItem('token'); 
-        console.log(access_token );
-        headers.append('Content-Type', 'application/json');
-        headers.append('Accept', 'application/json'); 
-        headers.append('Authorization', 'Bearer ' + access_token);
-      
-        let options = new RequestOptions({ headers: headers });
-        this.http.get( environment.baseApiUrl + '/ap1/v1/users', options).subscribe((res) =>{ this.User =res.json();
-    console.log(this.User);
-  //this.router.navigate(['/starter']);
-}
-    );
+        
+  this.router.navigate(['/starter']);
+
+    
       }
         
     
@@ -70,10 +79,12 @@ export class LoginComponent implements OnInit, AfterViewInit {
     }
     signInWithGoogle(): void {
         this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
+    
       }
      
       signInWithFB(): void {
         this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
+     
       }
      
       signOut(): void {

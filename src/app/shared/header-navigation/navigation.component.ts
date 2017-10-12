@@ -1,7 +1,7 @@
 import { Component, AfterViewInit } from '@angular/core';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
-
+import { AuthService } from "angular4-social-login";
 
 @Component({
   selector: 'ap-navigation',
@@ -11,18 +11,22 @@ export class NavigationComponent implements AfterViewInit {
 	name:string;
   	showHide:boolean;
   
-  	constructor(private router: Router) {
+  	constructor(private router: Router,private authService: AuthService) {
     	this.showHide = true;
   	}
   
   	changeShowStatus(){
     	this.showHide = !this.showHide;
   	}
-    
-      onLoggedout() {
+      signOut(): void {
+        this.authService.signOut();
+      }
+      onLoggedout(): void {
+        this.authService.signOut();
         localStorage.removeItem('token');
+        
         localStorage.clear();
-        console.log(localStorage);
+         
         this.router.navigate(['/login']);
     }
     ngAfterViewInit() {
