@@ -4,8 +4,9 @@ import { Http ,Headers,RequestOptions} from '@angular/http';
 import {environment } from '../../environments/environment';
 import { AuthService } from "angular4-social-login";
 import { FacebookLoginProvider, GoogleLoginProvider } from "angular4-social-login";
- 
+import { SocialLoginModule, AuthServiceConfig } from "angular4-social-login";
 import { SocialUser } from "angular4-social-login";
+
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
@@ -19,15 +20,21 @@ export class LoginComponent implements OnInit, AfterViewInit {
     constructor(public http: Http,public router: Router ,private authService: AuthService, ) {}
 
     ngOnInit() {
+        
         this.authService.authState.subscribe((user) => {
             this.user1 = user;
             console.log(this.user1);
+             
             this.loggedIn = (user != null);
               
             if(this.loggedIn===true){
                  
                 
-                    localStorage.setItem('token', 'true');   
+                    localStorage.setItem('token', this.user1.id);  
+                    localStorage.setItem('name', this.user1.name);  
+                    localStorage.setItem('photo', this.user1.photoUrl);  
+                    localStorage.setItem('email', this.user1.email);  
+                     console.log(localStorage.photo);
                     this.router.navigate(['/starter']);
                 
                 
@@ -48,9 +55,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
         });
     }
 
-    onLoggedin(Username,password) {
-       
-     
+   /* onLoggedin(Username,password) { 
        let url = environment.baseApiUrl+'/oauth/token';
        let postData = {
          client_id : environment.baseApiClientId ,
@@ -67,16 +72,13 @@ export class LoginComponent implements OnInit, AfterViewInit {
         localStorage.setItem('token', this.resultado.access_token);         
         console.log(localStorage);
         
-  this.router.navigate(['/starter']);
-
-    
+  this.router.navigate(['/starter']); 
       }
-        
-    
-  
-        
+          
     );
-    }
+    }*/
+
+
     signInWithGoogle(): void {
         this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
     

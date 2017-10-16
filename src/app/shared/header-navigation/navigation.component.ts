@@ -8,25 +8,33 @@ import { AuthService } from "angular4-social-login";
   templateUrl: './navigation.component.html'
 })
 export class NavigationComponent implements AfterViewInit {
-	name:string;
+	name:any;
   	showHide:boolean;
-  
+      photo:any; 
+      email:any; 
   	constructor(private router: Router,private authService: AuthService) {
     	this.showHide = true;
   	}
-  
+      ngOnInit() {
+        this.photo =localStorage.getItem('photo');
+        this.name =localStorage.getItem('name');
+        this.email =localStorage.getItem('email');
+          
+              console.log(this.photo ); 
+        }
   	changeShowStatus(){
     	this.showHide = !this.showHide;
   	}
-      signOut(): void {
-        this.authService.signOut();
-      }
+     
       onLoggedout(): void {
         this.authService.signOut();
-        localStorage.removeItem('token');
-        
-        localStorage.clear();
          
+        localStorage.removeItem('token');
+        localStorage.removeItem('photo');
+        localStorage.removeItem('name');
+        localStorage.clear();
+        this.authService.signOut();
+   
         this.router.navigate(['/login']);
     }
     ngAfterViewInit() {

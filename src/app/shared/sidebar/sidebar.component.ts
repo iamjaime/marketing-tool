@@ -1,11 +1,28 @@
 import { Component, AfterViewInit } from '@angular/core';
-
+import { AuthService } from "angular4-social-login";
+import { Router } from '@angular/router';
+import { SocialUser } from "angular4-social-login";
 @Component({
   selector: 'ap-sidebar',
   templateUrl: './sidebar.component.html'
 })
 export class SidebarComponent implements AfterViewInit {
-	
+     user: any;
+    private user1: SocialUser;
+    private loggedIn: boolean;
+   photo:any;
+   name:any;
+   email:any;
+    constructor(private authService: AuthService,private router: Router) { }
+
+    ngOnInit() {
+      this.photo =localStorage.getItem('photo');
+      this.name =localStorage.getItem('name');
+      this.email =localStorage.getItem('email');
+        
+            console.log(this.photo ); 
+      }
+
     ngAfterViewInit() {
         $(function () {
             var url = window.location.toString();
@@ -25,4 +42,21 @@ export class SidebarComponent implements AfterViewInit {
             (<any>$('#sidebarnav')).metisMenu();
         });
     }
+    onLoggedout()  {
+        if(this.loggedIn===true){
+            
+           
+               localStorage.setItem('token', this.user1.id);  
+               localStorage.setItem('name', this.user1.name);  
+               localStorage.setItem('photo', this.user1.photoUrl);  
+               localStorage.setItem('email', this.user1.email);  
+                console.log(localStorage.photo);
+               this.router.navigate(['/starter']);
+           
+           
+       }
+      
+  
+       this.router.navigate(['/login']);
+   }
 }

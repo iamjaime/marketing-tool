@@ -8,13 +8,15 @@
     <nav class="sidebar-nav">
       <ul id="sidebarnav">
         <li class="user-profile">
-          <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><img src="assets/images/users/profile.png" alt="user" /><span class="hide-menu">Steave Jobs </span></a>
+          <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
+            
+            <img src="{{photo}}" alt="user" /><span class="hide-menu"> {{name}}</span></a>
           <ul aria-expanded="false" class="collapse">
             <!--<li><a href="javascript:void()">My Profile </a></li>-->
             <li><a routerLink="/starter" [routerLinkActive]="['router-link-active']" href="javascript:void()">My Balance</a></li>
             <!--<li><a href="javascript:void()">Inbox</a></li>-->
             <li><a href="javascript:void()">Account Settings</a></li>
-            <li><a href="javascript:void()">Logout</a></li>
+            <li><a (click)="onLoggedout()">Logout</a></li>
           </ul>
         </li>
         <li class="nav-devider"></li>
@@ -36,7 +38,7 @@
             <!--<li><a routerLink="/starter" [routerLinkActive]="['router-link-active']">Reviews</a></li>-->
           </ul>
         </li>
-        <li>
+       <!-- <li>
           <a class="has-arrow" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-instagram"></i><span class="hide-menu">Instagram</span></a>
           <ul aria-expanded="false" class="collapse">
             <li><a routerLink="/accordion" [routerLinkActive]="['router-link-active']">Follows</a></li>
@@ -80,7 +82,7 @@
             <li><a routerLink="/accordion" [routerLinkActive]="['router-link-active']">Web Page Visits</a></li>
             <li><a routerLink="/alert" [routerLinkActive]="['router-link-active']">Newsletter Subscribers</a></li>
           </ul>
-        </li>
+        </li>-->
 
         <!--<li class="nav-small-cap">PERSONAL</li>
         <li>

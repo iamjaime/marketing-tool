@@ -5,15 +5,21 @@ import {NgbPanelChangeEvent} from '@ng-bootstrap/ng-bootstrap';
 	selector: 'ngbd-accordion-basic',
 	templateUrl: 'accordion.component.html'
 })
-export class NgbdAccordionBasic {
-   beforeChange($event: NgbPanelChangeEvent) {
-
-    if ($event.panelId === 'preventchange-2') {
-      $event.preventDefault();
+export class NgbdAccordionBasic  {
+  photo:any;
+  name:any;
+  email:any;
+  constructor() {}
+  ngOnInit() {
+    this.photo =localStorage.getItem('photo');
+    this.name =localStorage.getItem('name');
+    this.email =localStorage.getItem('email');
+      
+          console.log(this.photo ); 
     }
 
-    if ($event.panelId === 'preventchange-3' && $event.nextState === false) {
-      $event.preventDefault();
-    }
-  };
+  buy(){
+    alert('buy likes in facebook');
+  }
+  
 }
