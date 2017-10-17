@@ -9,7 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SocialLoginModule, AuthServiceConfig } from "angular4-social-login";
 import { GoogleLoginProvider, FacebookLoginProvider } from "angular4-social-login";
- 
+
 let config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
@@ -20,15 +20,23 @@ let config = new AuthServiceConfig([
     provider: new FacebookLoginProvider("531968097138866")
   }
 ]);
+<<<<<<< HEAD
  
 export function provideConfig() {
   return config;
 }
+=======
+
+export function provideConfig() {
+  return config;
+}
+
+>>>>>>> 234cbbdbd851e2c37237af3d4aec74920bf3a836
 
 @NgModule({
   declarations: [
     AppComponent,
-   
+
   ],
   imports: [
     BrowserModule,
@@ -38,7 +46,10 @@ export function provideConfig() {
     SocialLoginModule.initialize(config),
     
   ],
-  providers: [AuthGuard],
+  providers: [{
+    provide: AuthServiceConfig,
+    useFactory: provideConfig
+  }, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
