@@ -2,6 +2,9 @@ import { Component, AfterViewInit } from '@angular/core';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { AuthService } from "angular4-social-login";
+import { FacebookLoginProvider, GoogleLoginProvider } from "angular4-social-login";
+import { SocialLoginModule, AuthServiceConfig } from "angular4-social-login";
+import { SocialUser } from "angular4-social-login";
 
 @Component({
   selector: 'ap-navigation',
@@ -28,13 +31,7 @@ export class NavigationComponent implements AfterViewInit {
      
       onLoggedout(): void {
         this.authService.signOut();
-         
-        localStorage.removeItem('token');
-        localStorage.removeItem('photo');
-        localStorage.removeItem('name');
-        localStorage.clear();
-        this.authService.signOut();
-   
+      
         this.router.navigate(['/login']);
     }
     ngAfterViewInit() {

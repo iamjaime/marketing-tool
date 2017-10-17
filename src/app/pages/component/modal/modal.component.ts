@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {NgbModal, ModalDismissReasons, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+ 
 
 @Component({
 	selector: 'ngbd-modal',
@@ -18,14 +19,28 @@ import {NgbModal, ModalDismissReasons, NgbActiveModal} from '@ng-bootstrap/ng-bo
 
 export class NgbdModalBasic {
   closeResult: string;
-	
-  constructor(private modalService: NgbModal, private modalService2: NgbModal) {} 
+  photo:any;
+  name:any;
+  email:any;
+  
+  ngOnInit() {
+    this.photo =localStorage.getItem('photo');
+    this.name =localStorage.getItem('name');
+    this.email =localStorage.getItem('email');
+      
+          console.log(this.photo ); 
+    }
+  constructor(private modalService: NgbModal, private modalService2: NgbModal) {
+
+
+    
+  } 
 
   open2(content) { 
     this.modalService.open(content).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
+     // this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+     // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
   }
   open(content) {
@@ -39,6 +54,15 @@ export class NgbdModalBasic {
     } else {
       return  `with: ${reason}`;
     }
+  }
+  buy(Username,like){
+    console.log('url:'+Username,'usuario:'+this.name,'like:'+like);
+   // window.open(Username, "nuevo", "directories=no, location=no, menubar=no, scrollbars=yes, statusbar=no, tittlebar=no, width=400, height=400");
+     
+  }
+   cancel(){
+    console.log('cansel');
+     
   }
 
 }

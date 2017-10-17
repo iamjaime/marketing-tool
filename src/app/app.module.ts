@@ -35,7 +35,8 @@ export function provideConfig() {
     FormsModule,
     HttpModule,
     AppRoutingModule,
-    SocialLoginModule.initialize(config)
+    SocialLoginModule.initialize(config),
+    
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]

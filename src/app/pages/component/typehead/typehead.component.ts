@@ -144,5 +144,5 @@ export class NgbdtypeheadBasic{
       .map(term => term === '' ? []
         : statesWithFlags.filter(v => v.name.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10));
 
-  formatter2 = (x: {name: string}) => x.name; 
+  formatter2 = (x: {name: string}) => x.name;  
 }

@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { NgbdModalBasic } from './modal.component';
-
+ 
 
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -12,7 +12,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 const routes: Routes = [{
 	path: '',
 	data: {
-      title: 'Modal',
+      title: 'Facebook',
       urls: [{title: 'Dashboard', url: '/'},{title: 'ngComponent'},{title: 'Modal'}]
     },
 	component: NgbdModalBasic

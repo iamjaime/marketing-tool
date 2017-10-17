@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { StarterComponent } from './starter.component';
-
+import Chart from 'chart.js';
 
 const routes: Routes = [{
 	path: '',

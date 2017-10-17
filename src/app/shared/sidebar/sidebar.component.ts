@@ -43,20 +43,11 @@ export class SidebarComponent implements AfterViewInit {
         });
     }
     onLoggedout()  {
-        if(this.loggedIn===true){
-            
-           
-               localStorage.setItem('token', this.user1.id);  
-               localStorage.setItem('name', this.user1.name);  
-               localStorage.setItem('photo', this.user1.photoUrl);  
-               localStorage.setItem('email', this.user1.email);  
-                console.log(localStorage.photo);
-               this.router.navigate(['/starter']);
-           
-           
-       }
-      
-  
-       this.router.navigate(['/login']);
+     
+        this.authService.signOut();
+        localStorage.removeItem('id');
+        localStorage.clear();
+        console.log(this.authService);
+        this.router.navigate(['/login']);
    }
 }

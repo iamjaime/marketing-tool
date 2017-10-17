@@ -10,13 +10,7 @@ import 'rxjs/add/operator/map';
     styleUrls: ['./signup.component.css']
 })
 export class SignupComponent   {
-    public baseApiUrl: 'http://127.0.0.1:8000/api/v1/users';
-    public baseApiPrefix : 'api';
-    public baseApiVersion: 'v1';
-    public baseApiClientId : 1;
-    public baseApiClientSecret: 'Lt2TlSj17byjEUtKQLLqfoz2QTe2XA0trg6VV1vo';
-    public baseApiGrantType : 'password';
-     EnvVariables = new OpaqueToken("env.variables");
+  
     constructor(public http: Http,public router: Router) {}
  
 
