@@ -20,18 +20,11 @@ let config = new AuthServiceConfig([
     provider: new FacebookLoginProvider("531968097138866")
   }
 ]);
-<<<<<<< HEAD
- 
-export function provideConfig() {
-  return config;
-}
-=======
 
 export function provideConfig() {
   return config;
 }
 
->>>>>>> 234cbbdbd851e2c37237af3d4aec74920bf3a836
 
 @NgModule({
   declarations: [

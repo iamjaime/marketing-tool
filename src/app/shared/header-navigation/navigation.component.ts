@@ -31,7 +31,8 @@ export class NavigationComponent implements AfterViewInit {
      
       onLoggedout(): void {
         this.authService.signOut();
-      
+        localStorage.removeItem('id');
+        localStorage.clear(); 
         this.router.navigate(['/login']);
     }
     ngAfterViewInit() {

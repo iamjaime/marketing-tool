@@ -47,7 +47,7 @@ export class SidebarComponent implements AfterViewInit {
         this.authService.signOut();
         localStorage.removeItem('id');
         localStorage.clear();
-        console.log(this.authService);
+        
         this.router.navigate(['/login']);
    }
 }
