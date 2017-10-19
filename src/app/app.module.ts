@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SocialLoginModule, AuthServiceConfig } from "angular4-social-login";
 import { GoogleLoginProvider, FacebookLoginProvider } from "angular4-social-login";
+import { FacebookModule } from 'ngx-facebook';
 
 let config = new AuthServiceConfig([
   {
@@ -37,6 +38,7 @@ export function provideConfig() {
     HttpModule,
     AppRoutingModule,
     SocialLoginModule.initialize(config),
+    FacebookModule.forRoot()
     
   ],
   providers: [{

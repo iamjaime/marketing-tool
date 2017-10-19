@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
             this.loggedIn = (user != null);
              
             if(this.loggedIn===true){    
-                      let url = environment.baseApiUrl+'/oauth/token';
+                     /* let url = environment.baseApiUrl+'/oauth/token';
                       let postData = {
                       client_id : environment.baseApiClientId ,
                       client_secret :environment.baseApiClientSecret,
@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
                        let options = new RequestOptions({ headers: headers }); 
                         this.http.post( 'http://192.168.1.72/marketing-tool/public/api/v1/users' , { data : postData1 },options)
                        .subscribe(response     => {
-                       console.log(response);
+                       console.log(response);*/
                        localStorage.setItem('id', this.user1.id);  
                        localStorage.setItem('name', this.user1.name);  
                        localStorage.setItem('photo', this.user1.photoUrl);  
@@ -56,12 +56,12 @@ export class LoginComponent implements OnInit, AfterViewInit {
                        console.log(localStorage);                      
                        this.router.navigate(['/starter']); 
                         
-                 },
+                /* },
                  err => {
                    console.log(err); 
                  }
                
-               );
+               );*/
                     
                     
 

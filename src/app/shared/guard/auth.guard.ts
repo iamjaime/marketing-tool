@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
 import { CanActivate } from '@angular/router';
 import { Router } from '@angular/router';
-import { AuthService } from "angular4-social-login";
+
 @Injectable()
 export class AuthGuard implements CanActivate {
 
-    constructor(private router: Router,private authService: AuthService) { }
+    constructor(private router: Router) { }
 
     canActivate() {
-        console.log(this.authService);
-        if (this.authService != null) {
+        if (localStorage.getItem('id')) {
             return true;
         }
 
