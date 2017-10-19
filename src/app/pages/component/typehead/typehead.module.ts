@@ -8,8 +8,8 @@ import { HttpModule, JsonpModule } from '@angular/http';
 const routes: Routes = [{
 	path: '',
 	data: {
-      title: 'Pagination',
-      urls: [{title: 'Dashboard', url: '/'},{title: 'ngComponent'},{title: 'Pagination'}]
+      title: 'Facebook',
+      urls: [{title: 'Dashboard', url: '/'},{title: 'ngComponent'},{title: 'Comments'}]
     },
 	component: NgbdtypeheadBasic
 }];

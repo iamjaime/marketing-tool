@@ -1,18 +1,55 @@
 <div class="row">
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-body">
-                <h3 class="card-title">Simple Typeahead</h3>
-                <h6 class="card-subtitle">A typeahead example that gets values from a static string</h6>
-                <label for="typeahead-basic">Search for a USA state:</label>
-                <input id="typeahead-basic" type="text" class="form-control" [(ngModel)]="model"  />
-                <button (click)="ver()">ver imagen</button>
-                <div class="m-t-10" *ngIf="model">   
-                    {{model}}
-                    	<iframe src="enlace" width="266" height="476" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">
+                                         
+                                        <i class="fa fa-commenting-o fa-2x" aria-hidden="true"></i>Buy comments</h3>
+                                    <h6 class="card-subtitle">This is a link pack for publication</h6>
+                                    <form action=""> 
+                    <ng-template #content let-c="close" let-d="dismiss">
+                      <div class="modal-header">
+                         
+                            <h3 class="card-title"><img src="{{photo}}"  style="width: 30px; height: 30px; border-radius: 150px; -webkit-border-radius: 150px; -moz-border-radius: 150px;" />{{name}}</h3>
+                        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                     
+                            <div class="form-group">
+                                    <h4 class="modal-title">	<i class="fa fa-commenting-o fa-2x" aria-hidden="true"></i> Buy comments</h4>
+                             
+                                    <label for="firstName1">Facebook URL to like:</label>
+                                    
+                                    <input #Username ng-model="Username" type="text" id="Username" class="form-control"  placeholder="http:// url facebook" required/> </div>
+                             
+                                 
+                                 
+     <br>
+                                     <label for="firstName1">Number of comments:</label>
+                                    <input #like ng-model="like" type="number" id="like" class="form-control"  placeholder="example 10" required/> </div>
+                                    
+                                    <div class="form-group">
+                              </div>
+                      <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+                            <button type="button" class="btn btn-secondary" (click)="buy(Username.value,like.value)">Buy Now</button>
+                    
+                         
+                        </div>
+                     
+                         
+                    </ng-template>
+                </form>
+                    <button class="btn btn-lg   " style="color:antiquewhite ;background-color: #187BFD" (click)="open2(content)">0.00057 BTC</button>
+                    <div class="m-t-20">{{closeResult}}</div>
+                    
                 </div>
-  			</div>
+            </div>
+            </div>
+            <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2F375898239464051%2Fvideos%2F409093759477832%2F&show_text=0&width=266" width="266" height="476" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
+         
+         
         </div>
-    </div>
-    
-</div>
+        
