@@ -13,6 +13,8 @@ import {   ViewEncapsulation } from '@angular/core';
 import {NgbModal, ModalDismissReasons, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import { FacebookService, UIParams, UIResponse } from 'ngx-facebook';
 import {  InitParams } from 'ngx-facebook';
+import * as io from 'socket.io-client';
+ 
  
 declare const FB: any;
 
@@ -30,7 +32,12 @@ export class WikipediaService {
 	providers: [WikipediaService]
 }) 
  
-export class NgbdfaceBasic{
+export class NgbdfaceBasic{ 
+  private socket: SocketIOClient.Socket; // The client instance of socket.io
+  
+  
+  private urls = 'http://192.168.1.72:3001';
+ 
   closeResult: string;
   photo:any;
   name:any;
@@ -43,17 +50,11 @@ export class NgbdfaceBasic{
   cut:any;
   enlace:any;
   heroes = ['Windstorm', 'Bombasto', 'Magneta', 'Tornado'];
-  ngOnInit() {
-    this.id =localStorage.getItem('id');
-    this.photo =localStorage.getItem('photo');
-    this.name =localStorage.getItem('name');
-    this.email =localStorage.getItem('email');
-      
-       
-        
-    }
+  
   constructor(private modalService: NgbModal, private modalService2: NgbModal,private fb: FacebookService) {
-
+    this.socket = io(this.urls);
+     
+     
     let initParams: InitParams = {
       appId:  this.id,
       xfbml: true,
@@ -62,10 +63,19 @@ export class NgbdfaceBasic{
  
     fb.init(initParams);
  
-   
     
+   
+  
   } 
-
+  ngOnInit() {
+    this.id =localStorage.getItem('id');
+    this.photo =localStorage.getItem('photo');
+    this.name =localStorage.getItem('name');
+    this.email =localStorage.getItem('email');
+     
+    this.socket.emit('new_message', this.name);
+        
+    }
   open2(content) { 
     this.modalService.open(content).result.then((result) => {
      // this.closeResult = `Closed with: ${result}`;
@@ -137,5 +147,8 @@ likes1(id){
   );
  
  
+   }
+   conecta(){
+    this.socket.emit('new_message', this.name);
    }
 }

@@ -10,7 +10,8 @@ import { AppComponent } from './app.component';
 import { SocialLoginModule, AuthServiceConfig } from "angular4-social-login";
 import { GoogleLoginProvider, FacebookLoginProvider } from "angular4-social-login";
 import { FacebookModule } from 'ngx-facebook';
-
+import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
+const config2: SocketIoConfig = { url: 'http://localhost:3001', options: {} };
 let config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
@@ -38,7 +39,8 @@ export function provideConfig() {
     HttpModule,
     AppRoutingModule,
     SocialLoginModule.initialize(config),
-    FacebookModule.forRoot()
+    FacebookModule.forRoot(),
+    SocketIoModule.forRoot(config2)
     
   ],
   providers: [{

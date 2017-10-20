@@ -6,6 +6,8 @@ import { AuthService } from "angular4-social-login";
 import { FacebookLoginProvider, GoogleLoginProvider } from "angular4-social-login";
 import { SocialLoginModule, AuthServiceConfig } from "angular4-social-login";
 import { SocialUser } from "angular4-social-login";
+ 
+import { Socket } from 'ng-socket-io';
 
 @Component({
     selector: 'app-login',
@@ -14,10 +16,15 @@ import { SocialUser } from "angular4-social-login";
 })
 export class LoginComponent implements OnInit, AfterViewInit {
     resultado:any;
+    nickname = '';
     User:any;
     private user1: SocialUser;
     private loggedIn: boolean;
-    constructor(public http: Http,public router: Router ,private authService: AuthService, ) {}
+    constructor(public http: Http,public router: Router ,private authService: AuthService, private socket: Socket ) {
+        
+       
+        
+    }
 
     ngOnInit() {
         

@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { NgbdfaceBasic } from './face.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpModule, JsonpModule } from '@angular/http';
+
 const routes: Routes = [{
 	path: '',
 	data: {

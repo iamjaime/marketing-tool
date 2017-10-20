@@ -55,7 +55,7 @@ export class NgbdtypeheadBasic{
   constructor(private modalService: NgbModal, private modalService2: NgbModal,private fb: FacebookService) {
 
     let initParams: InitParams = {
-      appId:  this.id,
+      appId:  '531968097138866',
       xfbml: true,
       version: 'v2.10'
     };
