@@ -2,16 +2,16 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
-import { NgbdtypeheadBasic } from './typehead.component';
+import { NgbdsharedBasic } from './shared.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpModule, JsonpModule } from '@angular/http';
 const routes: Routes = [{
 	path: '',
 	data: {
-      title: 'Facebook',
-      urls: [{title:  'Home', url: '/starter'},{title: 'Facebook'},{title: 'Comments'}]
+      title: 'Facebook - Shared',
+      urls: [{title:  'Home', url: '/starter'},{title: 'Facebook'},{title: 'Shared'}]
     },
-	component: NgbdtypeheadBasic
+	component: NgbdsharedBasic
 }];
 
 @NgModule({
@@ -23,6 +23,6 @@ const routes: Routes = [{
       NgbModule.forRoot(),
     	RouterModule.forChild(routes)
     ],
-	declarations: [NgbdtypeheadBasic]
+	declarations: [NgbdsharedBasic]
 })
-export class TypeheadModule { }
+export class SharedModule { }

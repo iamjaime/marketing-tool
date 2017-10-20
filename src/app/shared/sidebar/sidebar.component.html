@@ -29,11 +29,15 @@
         <!--</li>-->
         <li class="nav-small-cap">Services</li>
         <li>
-          <a class="has-arrow" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-facebook"></i><span class="hide-menu">Facebook</span></a>
+            <a class="has-arrow" href="javascript:void(0)" aria-expanded="false" routerLink="/starter" [routerLinkActive]="['router-link-active']"><i class="fa fa-home"></i><span class="hide-menu">Home</span></a>
+            
+          </li>
+        <li>
+          <a class="has-arrow" href="javascript:void(0)" aria-expanded="false" routerLink="/face" [routerLinkActive]="['router-link-active']"><i class="fa fa-facebook"></i><span class="hide-menu">Facebook</span></a>
           <ul aria-expanded="false" class="collapse">
             <li><a routerLink="/modal" [routerLinkActive]="['router-link-active']">Likes</a></li>
-            <li><a routerLink="/starter" [routerLinkActive]="['router-link-active']">Posts</a></li>
-            <li><a routerLink="/carousel" [routerLinkActive]="['router-link-active']">Shares</a></li>
+            <li><a routerLink="/posts" [routerLinkActive]="['router-link-active']">Posts</a></li>
+            <li><a routerLink="/shared" [routerLinkActive]="['router-link-active']">Shares</a></li>
             <li><a routerLink="/typehead" [routerLinkActive]="['router-link-active']">Comments</a></li>
             <!--<li><a routerLink="/starter" [routerLinkActive]="['router-link-active']">Reviews</a></li>-->
           </ul>
