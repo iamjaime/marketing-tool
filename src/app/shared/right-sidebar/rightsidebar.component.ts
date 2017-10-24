@@ -15,16 +15,16 @@ import {NgbModal, ModalDismissReasons, NgbActiveModal} from '@ng-bootstrap/ng-bo
 import { FacebookService, UIParams, UIResponse } from 'ngx-facebook';
 import {  InitParams } from 'ngx-facebook';
 import * as io from 'socket.io-client';
- 
- 
+
+
 declare const FB: any;
 
- 
+
 
 @Injectable()
 export class WikipediaService {
- 
-  
+
+
 }
 
 @Component({
@@ -33,10 +33,10 @@ export class WikipediaService {
 })
 export class RightSidebarComponent {
 	private socket: SocketIOClient.Socket; // The client instance of socket.io
-  
-  
-  private urls = 'http://192.168.1.72:3001';
-	
+
+
+  private urls = 'http://localhost:3001';
+
 	 closeResult: string;
 	 photo:any;
 	 users:any;
@@ -49,39 +49,45 @@ export class RightSidebarComponent {
 	 url:any;
 	 cut:any;
 	 enlace:any;
-	 heroes = ['Windstorm', 'Bombasto', 'Magneta', 'Tornado'];
-	 
+	 public heroes = [];
+
 	 constructor(private modalService: NgbModal, private modalService2: NgbModal,private fb: FacebookService) {
     this.socket = io(this.urls);
-     
-     
+
+
     let initParams: InitParams = {
       appId:  this.id,
       xfbml: true,
       version: 'v2.10'
     };
- 
+
     fb.init(initParams);
- 
-    
-   
-  
-  } 
+
+
+
+
+  }
 	ngOnInit() {
 		this.id =localStorage.getItem('id');
     this.photo =localStorage.getItem('photo');
     this.name =localStorage.getItem('name');
     this.email =localStorage.getItem('email');
-     
-    this.socket.emit('set-nickname', this.name);
+
+    this.socket.emit('set-nickname',localStorage.getItem('id'),localStorage.getItem('name'),localStorage.getItem('photo'));
     this.socket.on('users-changed', (data) => {
-			 this.users=data;
-			 var items: number[] = [];
-			 for(var i = 1; i <=  this.users; i++){
-					items;
-			 }
-			 console.log( items);
-       
-    });
-	}
+
+			 this.cut= data.event;
+
+
+
+if(this.cut==='connect'){ this.heroes.push(data)}
+
+ console.log(this.heroes);
+
+
+	});
+
+
+
+	 }
 }

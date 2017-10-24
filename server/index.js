@@ -2,36 +2,43 @@ let app = require('express')();
 let http = require('http').Server(app);
 let io = require('socket.io')(http);
 
+var clients = [];
+var cant=0;
 io.on('connection', (socket) => {
+
+
   console.log('user connected' );
    socket.on('disconnect', function(){
-    io.emit('users-changed', {user: socket.nickname, event: 'left'});   
+    io.emit('users-changed', {user: socket.nickname, event: 'disconnect'});
+
+     clients.splice(clients.indexOf(socket.nickname), 1);
   });
- 
-  socket.on('set-nickname', (nickname) => {
+
+
+
+  socket.on('set-nickname', (idusu,nickname,photo) => {
     socket.nickname = nickname;
-    io.emit('users-changed', {user: nickname, event: 'joined'});    
-console.log(socket.nickname );	
-  });
-  
-  socket.on('add-message', (message) => {
-    io.emit('message', {text: message.text, from: socket.nickname, created: new Date()});    
-  });
-    socket.on('new_message', (message) => {
-            //socket.emit('new_message',message);
-            io.emit('new_message',message);
-            console.log( 'se unio '+message);
-        });
+
+    io.emit('users-changed', {id:idusu,user: nickname,photo:photo,  event: 'connect'});
+cant++;
+       clients.push(nickname);
+       console.log(socket.nickname ,clients,cant);
+
+});
+
+
   socket.on('disconnect', function(){
     console.log('user disconnected');
+    cant--;
+
   });
-  
- 
+
+
 });
 
 
 var port = process.env.PORT || 3001;
- 
+
 http.listen(port, function(){
-   console.log('listening in http://192.168.1.72:' + port);
+   console.log('listening in http://localhost:' + port);
 });

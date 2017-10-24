@@ -14,30 +14,30 @@ import {NgbModal, ModalDismissReasons, NgbActiveModal} from '@ng-bootstrap/ng-bo
 import { FacebookService, UIParams, UIResponse } from 'ngx-facebook';
 import {  InitParams } from 'ngx-facebook';
 import * as io from 'socket.io-client';
- 
- 
+
+
 declare const FB: any;
 
- 
+
 
 @Injectable()
 export class WikipediaService {
- 
-  
+
+
 }
 
 @Component({
 	selector: 'ngbd-pagination',
 	templateUrl: './face.component.html',
 	providers: [WikipediaService]
-}) 
- 
-export class NgbdfaceBasic{ 
+})
+
+export class NgbdfaceBasic{
   private socket: SocketIOClient.Socket; // The client instance of socket.io
-  
-  
-  private urls = 'http://192.168.1.72:3001';
- 
+
+
+  //private urls = 'http://127.0.0.1:3001';
+
   closeResult: string;
   photo:any;
   users:any;
@@ -51,38 +51,38 @@ export class NgbdfaceBasic{
   cut:any;
   enlace:any;
   heroes = ['Windstorm', 'Bombasto', 'Magneta', 'Tornado'];
-  
+
   constructor(private modalService: NgbModal, private modalService2: NgbModal,private fb: FacebookService) {
-    this.socket = io(this.urls);
-     
-     
+
+
+
     let initParams: InitParams = {
       appId:  this.id,
       xfbml: true,
       version: 'v2.10'
     };
- 
+
     fb.init(initParams);
- 
-    
-   
-  
-  } 
+
+
+
+
+  }
   ngOnInit() {
     this.id =localStorage.getItem('id');
     this.photo =localStorage.getItem('photo');
     this.name =localStorage.getItem('name');
     this.email =localStorage.getItem('email');
-     
+
    /* this.socket.emit('set-nickname', this.name);
     this.socket.on('users-changed', (data) => {
        this.users =data ;
-       console.log(this.users); 
+       console.log(this.users);
     });*/
-    
-        
+
+
     }
-  open2(content) { 
+  open2(content) {
     this.modalService.open(content).result.then((result) => {
      // this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
@@ -104,41 +104,41 @@ export class NgbdfaceBasic{
   buy(Username,like){
    // console.log('url:'+Username,'usuario:'+this.name,'like:'+like);
    // window.open(Username, "nuevo", "directories=no, location=no, menubar=no, scrollbars=yes, statusbar=no, tittlebar=no, width=400, height=400");
-  
+
    this.url  = Username;
-   
+
   var arregloDeCadenas = this.url.split("/");
-  
+
   console.log("<br>El arreglo tiene " + arregloDeCadenas.length + " elementos: ");
   console.log(arregloDeCadenas[4]);
   this.cut = arregloDeCadenas[3].substring(0, 9);
- 
-  
+
+
   if(arregloDeCadenas[3] ==='groups'){
-   
+
      this.likes1(arregloDeCadenas[6]);
-     
+
    }
   if(this.cut ==='photo.php'){
-   var idcut = arregloDeCadenas[3].substring(15, 100); 
-    var subcadena = idcut.split("&"); 
+   var idcut = arregloDeCadenas[3].substring(15, 100);
+    var subcadena = idcut.split("&");
      this.likes1(subcadena[0]);
-    
+
   }
   // videos
-  if(arregloDeCadenas[4]==='videos'){ 
+  if(arregloDeCadenas[4]==='videos'){
      this.likes1(arregloDeCadenas[5]);
   }
   //photos
   if(arregloDeCadenas[4]==='photos'){
     this.likes1(arregloDeCadenas[6]);
   }
- 
+
 
   /*for (var i=0; i < arregloDeCadenas.length; i++) {
      console.log(arregloDeCadenas[i] + " / ");
   } */
- 
+
 }
 likes1(id){
   FB.api(
@@ -147,12 +147,12 @@ likes1(id){
     {"fields":"sharedposts{from,name,description,full_picture,is_published,permalink_url,created_time},format"},
     function(response) {
       this.likes = response ;
-      console.log(this.likes); 
+      console.log(this.likes);
         // Insert your code here
     }
   );
- 
- 
+
+
    }
    conecta(){
     this.socket.emit('new_message', this.name);
