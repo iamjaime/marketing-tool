@@ -40,6 +40,7 @@ export class NgbdfaceBasic{
  
   closeResult: string;
   photo:any;
+  users:any;
   name:any;
   email:any;
   id:any;
@@ -73,7 +74,12 @@ export class NgbdfaceBasic{
     this.name =localStorage.getItem('name');
     this.email =localStorage.getItem('email');
      
-    this.socket.emit('new_message', this.name);
+   /* this.socket.emit('set-nickname', this.name);
+    this.socket.on('users-changed', (data) => {
+       this.users =data ;
+       console.log(this.users); 
+    });*/
+    
         
     }
   open2(content) { 
