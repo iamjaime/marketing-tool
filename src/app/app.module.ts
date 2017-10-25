@@ -38,10 +38,9 @@ export function provideConfig() {
     FormsModule,
     HttpModule,
     AppRoutingModule,
-    SocialLoginModule.initialize(config),
+    SocialLoginModule,
     FacebookModule.forRoot(),
     SocketIoModule.forRoot(config2)
-
   ],
   providers: [{
     provide: AuthServiceConfig,
