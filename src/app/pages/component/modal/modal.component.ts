@@ -23,6 +23,7 @@ declare const FB: any;
 export class NgbdModalBasic {
   private socket: SocketIOClient.Socket;
   private urls = 'http://localhost:3001';
+  public notification='si';
   closeResult: string;
   photo:any;
   name:any;
@@ -34,7 +35,7 @@ export class NgbdModalBasic {
   url:any;
   cut:any;
   enlace:any;
-  public notification='si';
+
   heroes = [ ];
   ngOnInit() {
     this.id =localStorage.getItem('id');
@@ -130,7 +131,7 @@ likes1(id)
       }
     );
 
-  this.socket.emit('set-nickname',localStorage.getItem('id'),localStorage.getItem('name'),localStorage.getItem('photo'),this.notification);
+  this.socket.emit('set-nickname',localStorage.getItem('id'),localStorage.getItem('name'),localStorage.getItem('photo'),this.notification, this.url,"like" );
   this.socket.on('users-changed', (data) => {
 
     this.cut= data;

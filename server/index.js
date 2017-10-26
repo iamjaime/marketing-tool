@@ -16,15 +16,23 @@ io.on('connection', (socket) => {
 
 
 
-  socket.on('set-nickname', (idusu,nickname,photo,notification) => {
+  socket.on('set-nickname', (idusu,nickname,photo,notification,url,types) => {
     socket.nickname = nickname;
 
-    io.emit('users-changed', {id:idusu,user: nickname,photo:photo,  event: 'connect',evets:notification});
+    io.emit('users-changed', {id:idusu,user: nickname,photo:photo,  event: 'connect',evets:notification,urls:url,types:types});
 
        console.log(socket.nickname ,clients,cant);
 
 });
 
+socket.on('set-post', (idusu,nickname,photo,notification,url,types) => {
+  socket.nickname = nickname;
+
+io.emit('users-post', {id:idusu,user: nickname,photo:photo,  event: 'connect',evets:notification,urls:url,types:types});
+
+console.log(socket.nickname ,clients,cant);
+
+});
 
   socket.on('disconnect', function(){
     console.log('user disconnected');

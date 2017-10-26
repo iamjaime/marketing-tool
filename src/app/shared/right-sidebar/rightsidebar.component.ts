@@ -84,34 +84,62 @@ if(this.cut.event==='connect'){
   this.heroes.push(data);
   console.log(this.heroes);
 }
+ if(this.cut.evets==='si'){
+        if(localStorage.getItem('id') != this.cut.id) {
+
+          swal({
+            html:'<iframe src="https://www.facebook.com/plugins/post.php?href=' +
+            this.cut.urls+ '&width=500&show_text=false& = &height=497' +
+            '"  width="100%"height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>' +
+            '<br>  <img src="' + this.cut.photo
+            +
+            '"  style="width: 30px; height: 30px; border-radius: 150px; -webkit-border-radius: 150px; -moz-border-radius: 150px;" /><b> ' +
+            this.cut.user+'</b> <br>requested  1 '+this.cut.types
+            +' for $ 1 dollar',
+
+            confirmButtonText: 'Cancel',
+
+            showLoaderOnConfirm: true,
 
 
+
+          })
+
+
+        }
+}
+	});
+
+    this.socket.emit('set-post',localStorage.getItem('id'),localStorage.getItem('name'),localStorage.getItem('photo'));
+    this.socket.on('users-post', (data) => {
+
+      this.cut= data;
 
       if(this.cut.evets==='si'){
         if(localStorage.getItem('id') != this.cut.id) {
 
           swal({
-            title: '<i>New</i> <u>Job</u>',
-            type: 'info',
-            html:
-            'give a like on the next page, ' +
-            '<a href="https://www.facebook.com/PirelliMexico/photos/a.1403127936620711.1073741828.1402819096651595/1963038563962976/?type=3&theater">links</a> ' +
-            'and other HTML tags',
-            showCloseButton: true,
-            showCancelButton: true,
-            focusConfirm: false,
-            confirmButtonText:
-              '<i class="fa fa-thumbs-up"></i> Great!',
-            confirmButtonAriaLabel: 'Thumbs up, great!',
-            cancelButtonText:
-              '<i class="fa fa-thumbs-down"></i>',
-            cancelButtonAriaLabel: 'Thumbs down',
+            html:'<iframe src="https://www.facebook.com/plugins/post.php?href=' +
+            this.cut.urls+ '&width=500&show_text=false& = &height=497' +
+            '"  width="100%"height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>' +
+            '<br>  <img src="' + this.cut.photo
+            +
+            '"  style="width: 30px; height: 30px; border-radius: 150px; -webkit-border-radius: 150px; -moz-border-radius: 150px;" /><b> ' +
+            this.cut.user+'</b> <br>requested  1 '+this.cut.types
+            +' for $ 1 dollar',
+
+            confirmButtonText: 'Cancel',
+
+            showLoaderOnConfirm: true,
+
+
+
           })
+
+
         }
-}
-	});
-
-
+      }
+    });
 
 
 
