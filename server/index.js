@@ -16,12 +16,11 @@ io.on('connection', (socket) => {
 
 
 
-  socket.on('set-nickname', (idusu,nickname,photo) => {
+  socket.on('set-nickname', (idusu,nickname,photo,notification) => {
     socket.nickname = nickname;
 
-    io.emit('users-changed', {id:idusu,user: nickname,photo:photo,  event: 'connect'});
-cant++;
-       clients.push(nickname);
+    io.emit('users-changed', {id:idusu,user: nickname,photo:photo,  event: 'connect',evets:notification});
+
        console.log(socket.nickname ,clients,cant);
 
 });

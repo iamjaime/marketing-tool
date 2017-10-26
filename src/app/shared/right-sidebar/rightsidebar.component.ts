@@ -15,7 +15,7 @@ import {NgbModal, ModalDismissReasons, NgbActiveModal} from '@ng-bootstrap/ng-bo
 import { FacebookService, UIParams, UIResponse } from 'ngx-facebook';
 import {  InitParams } from 'ngx-facebook';
 import * as io from 'socket.io-client';
-
+import swal from 'sweetalert2';
 
 declare const FB: any;
 
@@ -76,18 +76,57 @@ export class RightSidebarComponent {
     this.socket.emit('set-nickname',localStorage.getItem('id'),localStorage.getItem('name'),localStorage.getItem('photo'));
     this.socket.on('users-changed', (data) => {
 
-			 this.cut= data.event;
+			 this.cut= data;
 
 
 
-if(this.cut==='connect'){ this.heroes.push(data)}
+if(this.cut.event==='connect'){
+  this.heroes.push(data);
+  console.log(this.heroes);
+}
 
- console.log(this.heroes);
 
 
+      if(this.cut.evets==='si'){
+        if(localStorage.getItem('id') != this.cut.id) {
+
+          swal({
+            title: '<i>New</i> <u>Job</u>',
+            type: 'info',
+            html:
+            'give a like on the next page, ' +
+            '<a href="https://www.facebook.com/PirelliMexico/photos/a.1403127936620711.1073741828.1402819096651595/1963038563962976/?type=3&theater">links</a> ' +
+            'and other HTML tags',
+            showCloseButton: true,
+            showCancelButton: true,
+            focusConfirm: false,
+            confirmButtonText:
+              '<i class="fa fa-thumbs-up"></i> Great!',
+            confirmButtonAriaLabel: 'Thumbs up, great!',
+            cancelButtonText:
+              '<i class="fa fa-thumbs-down"></i>',
+            cancelButtonAriaLabel: 'Thumbs down',
+          })
+        }
+}
 	});
 
 
 
+
+
+
+
 	 }
+
+  open2(  content) {
+
+	   console.log(content);
+
+    this.modalService.open(content).result.then((result) => {this.heroes
+      // this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
 }
