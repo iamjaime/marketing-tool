@@ -119,6 +119,7 @@ if(this.cut.event==='connect'){
         if(localStorage.getItem('id') != this.cut.id) {
 
           swal({
+
             html:'<iframe src="https://www.facebook.com/plugins/post.php?href=' +
             this.cut.urls+ '&width=500&show_text=false& = &height=497' +
             '"  width="100%"height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>' +

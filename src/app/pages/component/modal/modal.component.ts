@@ -8,6 +8,7 @@ declare const FB: any;
 @Component({
 	selector: 'ngbd-modal',
 	templateUrl: './modal.component.html',
+
 	encapsulation: ViewEncapsulation.None,
 	styles: [`
     .dark-modal .modal-content {
@@ -21,6 +22,7 @@ declare const FB: any;
 })
 
 export class NgbdModalBasic {
+
   private socket: SocketIOClient.Socket;
   private urls = 'http://localhost:3001';
   public notification='si';
@@ -35,7 +37,7 @@ export class NgbdModalBasic {
   url:any;
   cut:any;
   enlace:any;
-
+  _count = 0;
   heroes = [ ];
   ngOnInit() {
     this.id =localStorage.getItem('id');
@@ -60,6 +62,14 @@ export class NgbdModalBasic {
 
   }
 
+
+
+  increment() {
+    this._count++;
+  }
+
+
+
   open2(content) {
     this.modalService.open(content).result.then((result) => {
      // this.closeResult = `Closed with: ${result}`;
@@ -79,6 +89,9 @@ export class NgbdModalBasic {
       return  `with: ${reason}`;
     }
   }
+
+
+
   buy(Username,like){
    // console.log('url:'+Username,'usuario:'+this.name,'like:'+like);
    // window.open(Username, "nuevo", "directories=no, location=no, menubar=no, scrollbars=yes, statusbar=no, tittlebar=no, width=400, height=400");
@@ -119,7 +132,10 @@ export class NgbdModalBasic {
   } */
 
 }
-likes1(id)
+
+
+
+ likes1(id)
 {
     FB.api(
       '/'+id,
@@ -128,6 +144,7 @@ likes1(id)
         function(response) {
            this.likes = response.likes.data ;
           console.log(this.likes.splice(10));
+
       }
     );
 
@@ -141,10 +158,17 @@ likes1(id)
 
 
   });
+
   }
 
+   computeq(number){
+
+     if(number<0)
+       return 0;
+     return number - 1 ;
+
+
+  }
 
 }
-
-
 
