@@ -10,6 +10,7 @@ describe('Likes', () => {
     TestBed.configureTestingModule({
 
       providers:[
+
         NgbModule,FacebookService
       ],
       imports: [ NgbModule.forRoot (),FacebookModule.forRoot()],

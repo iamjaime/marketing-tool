@@ -6,7 +6,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { NgbdModalBasic } from './modal.component';
 
 
-
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 const routes: Routes = [{
@@ -18,8 +17,11 @@ const routes: Routes = [{
 	component: NgbdModalBasic
 }];
 
+
+
 @NgModule({
 	imports: [
+
     	FormsModule,
     	CommonModule,
       ReactiveFormsModule,

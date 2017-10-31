@@ -12,13 +12,10 @@ import { Socket } from 'ng-socket-io';
     styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit  {
-
-
     User:any;
     private user1: SocialUser;
-  AuthService:AuthService;
     private loggedIn: boolean;
-    constructor( public router: Router   ) {
+    constructor( public router: Router ,public aut:AuthService   ) {
 
 
 
@@ -28,7 +25,7 @@ export class LoginComponent implements OnInit  {
 
     ngOnInit() {
 
-        this.AuthService.authState.subscribe((user) => {
+        this.aut.authState.subscribe((user) => {
             this.user1 = user;
             console.log(this.user1);
 
@@ -84,47 +81,20 @@ export class LoginComponent implements OnInit  {
     }
 
 
-   /* onLoggedin(Username,password) {
-       let url = environment.baseApiUrl+'/oauth/token';
-       let postData = {
-         client_id : environment.baseApiClientId ,
-         client_secret :environment.baseApiClientSecret,
-         grant_type : environment.baseApiGrantType,
-         username : Username,
-         password :password
-       };
-
-        this.http.post(url, postData)
-       .subscribe(response     => {
-        this.resultado =    response.json()  ;
-        //console.log( this.resultado.access_token  );
-        localStorage.setItem('token', this.resultado.access_token);
-        console.log(localStorage);
-
-  this.router.navigate(['/starter']);
-      }
-
-    );
-    }*/
 
 
+    //login for google
     signInWithGoogle() {
-        this.AuthService.signIn(GoogleLoginProvider.PROVIDER_ID);
+        this.aut.signIn(GoogleLoginProvider.PROVIDER_ID);
 
       }
 
+      //login form Facebook
       signInWithFB(){
-        this.AuthService.signIn(FacebookLoginProvider.PROVIDER_ID);
+        this.aut.signIn(FacebookLoginProvider.PROVIDER_ID);
 
       }
 
-
-  compute(number){
-   if(number<0)
-     return 0;
-   return number - 1 ;
-
-    }
   }
 
 
