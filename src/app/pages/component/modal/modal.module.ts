@@ -4,11 +4,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { NgbdModalBasic } from './modal.component';
- 
+
 
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
- 
+
 const routes: Routes = [{
 	path: '',
 	data: {
@@ -22,9 +22,9 @@ const routes: Routes = [{
 	imports: [
     	FormsModule,
     	CommonModule,
-      ReactiveFormsModule, 
+      ReactiveFormsModule,
       NgbModule.forRoot(),
-    	RouterModule.forChild(routes)
+    	RouterModule.forChild(routes),NgbModule.forRoot()
     ],
 	declarations: [NgbdModalBasic]
 })

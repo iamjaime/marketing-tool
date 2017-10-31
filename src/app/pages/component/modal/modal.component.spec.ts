@@ -1,59 +1,64 @@
 import { NgbdModalBasic } from './modal.component';
+import { TestBed, async } from '@angular/core/testing';
+import { FacebookService,FacebookModule, UIParams, UIResponse } from 'ngx-facebook';
+import {NgbModule,ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
-import { async,   TestBed } from '@angular/core/testing';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-
-describe('likes', function () {
-
-  var comp: NgbdModalBasic;
-
-
-
+describe('Likes', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
 
-      declarations: [ NgbdModalBasic ]
-
-    })
-      .compileComponents() ;
+      providers:[
+        NgbModule,FacebookService
+      ],
+      imports: [ NgbModule.forRoot (),FacebookModule.forRoot()],
+      declarations: [
+        NgbdModalBasic
+      ]
+    }).compileComponents();
   }));
 
-
-
   ////// for id
-//  unit test of I like videos
-  it('videoLikes id', () => {
-    expect(localStorage.setItem('id', '1234567890')).toBeDefined();
-
-    expect(comp.likes1('1775136616123751')).toBeDefined();
-  });
-
-  //  unit test of I like photos
-  it('photoLikes id', () => {
-    expect(comp.likes1('1775136616123751')).toBeDefined();
-  });
-
-  //  unit test of I like  groups
-  it('Grup Likes id', () => {
-    expect(comp.likes1('1775136616123751')).toBeDefined( );
-  });
-
-//////for url
-
   //  unit test of I like videos
-  it('videoLikes url', () => {
-    expect(localStorage.setItem('id', '1234567890')).toBeDefined();
+  it('videoLikesUrl',  () => {
 
-    expect(comp.buy('https://www.facebook.com/MundoProgramadores/photos/a.968463743269667.1073741832.347614538687927/1424471807668856/?type=3&theater','10')).toBeDefined();
+    const fixture = TestBed.createComponent(NgbdModalBasic);
+    const app = fixture.debugElement.componentInstance;
+    expect(app.sendPublicate('1234567890','Jonathan Ramirez',"https://graph.facebook.com/1945778402415038/picture?type=normal",'https://www.facebook.com/memexicanitos/photos/a.10151603513494027.611812.93040704026/10156717475669027/?type=3&theater','likes')).toBeDefined();
   });
 
-  //  unit test of I like photos
-  it('photoLikes url', () => {
-    expect(comp.buy('https://www.facebook.com/MundoProgramadores/photos/a.968463743269667.1073741832.347614538687927/1424471807668856/?type=3&theater','10')).toBeDefined();
+  //  unit test of I like photo
+  it('photoLikeUrl',  () => {
+
+    const fixture = TestBed.createComponent(NgbdModalBasic);
+    const app = fixture.debugElement.componentInstance;
+    expect(app.sendPublicate('1234567890',
+      'Jonathan Ramirez',
+      "https://graph.facebook.com/1945778402415038/picture?type=normal",
+      'https://www.facebook.com/MiCiudadTolucaMetepec/photos/a.590564837701056.1073741913.127791343978410/1760237237400471/?type=3&theater',
+      'likes')).toBeDefined('1234567890');
   });
 
-  //  unit test of I like  groups
-  it('Grup Likes url', () => {
-    expect(comp.buy('https://www.facebook.com/MundoProgramadores/photos/a.968463743269667.1073741832.347614538687927/1424471807668856/?type=3&theater','10')).toBeDefined( );
+  it('grupoVideoLikeURL',  () => {
+
+    const fixture = TestBed.createComponent(NgbdModalBasic);
+    const app = fixture.debugElement.componentInstance;
+    expect(app.sendPublicate('1234567890',
+      'Jonathan Ramirez',
+      "https://graph.facebook.com/1945778402415038/picture?type=normal",
+      'https://www.facebook.com/ivan.moreflores/videos/1634722739872081/',
+      'likes')).toBeDefined();
+  });
+
+  it('grupoPhotoLikeURL',  () => {
+
+    const fixture = TestBed.createComponent(NgbdModalBasic);
+    const app = fixture.debugElement.componentInstance;
+    expect(app.sendPublicate('1234567890',
+      'Jonathan Ramirez',
+      "https://graph.facebook.com/1945778402415038/picture?type=normal",
+      'https://www.facebook.com/photo.php?fbid=1709177425759945&set=gm.1966444950280985&type=3&theater&ifg=1',
+      'likes')).toBe('1234567890');
   });
 });

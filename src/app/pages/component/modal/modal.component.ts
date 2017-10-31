@@ -9,16 +9,7 @@ declare const FB: any;
 	selector: 'ngbd-modal',
 	templateUrl: './modal.component.html',
 
-	encapsulation: ViewEncapsulation.None,
-	styles: [`
-    .dark-modal .modal-content {
-      background-color: #009efb;
-      color: white;
-    }
-    .dark-modal .close {
-      color: white;   
-    }
-  `]
+
 })
 
 export class NgbdModalBasic {
@@ -33,12 +24,22 @@ export class NgbdModalBasic {
   id:any;
   likes:any;
   public model: any;
-  idcut:any;
   url:any;
   cut:any;
-  enlace:any;
-  _count = 0;
+face:any;
   heroes = [ ];
+cute:any;
+  constructor(private modalService: NgbModal, private modalService2: NgbModal,private fb: FacebookService) {
+      this.socket = io(this.urls);
+      let initParams: InitParams = {
+        appId:   '531968097138866',
+        xfbml: true,
+        version: 'v2.10'
+      };
+
+         fb.init(initParams);
+
+  }
   ngOnInit() {
     this.id =localStorage.getItem('id');
     this.photo =localStorage.getItem('photo');
@@ -47,25 +48,6 @@ export class NgbdModalBasic {
 
 
 
-    }
-  constructor(private modalService: NgbModal, private modalService2: NgbModal,private fb: FacebookService) {
-    this.socket = io(this.urls);
-    let initParams: InitParams = {
-      appId:  this.id,
-      xfbml: true,
-      version: 'v2.10'
-    };
-
-    fb.init(initParams);
-
-
-
-  }
-
-
-
-  increment() {
-    this._count++;
   }
 
 
@@ -89,9 +71,6 @@ export class NgbdModalBasic {
       return  `with: ${reason}`;
     }
   }
-
-
-
   buy(Username,like){
    // console.log('url:'+Username,'usuario:'+this.name,'like:'+like);
    // window.open(Username, "nuevo", "directories=no, location=no, menubar=no, scrollbars=yes, statusbar=no, tittlebar=no, width=400, height=400");
@@ -100,11 +79,21 @@ export class NgbdModalBasic {
 
   var arregloDeCadenas = this.url.split("/");
 
-  console.log("<br>El arreglo tiene " + arregloDeCadenas.length + " elementos: ");
-  console.log(arregloDeCadenas[4]);
+
+
   this.cut = arregloDeCadenas[3].substring(0, 9);
+    this.cute = arregloDeCadenas[3].substring(0, 14);
+console.log(this.cute);
 
 
+    if(this.cute ==='photo.php?fbid'){
+      var idcut = arregloDeCadenas[3].substring(15, 100);
+
+      var subcadena = idcut.split("&");
+
+      this.likes1(subcadena[0]);
+
+    }
   if(arregloDeCadenas[3] ==='groups'){
 
      this.likes1(arregloDeCadenas[6]);
@@ -113,7 +102,9 @@ export class NgbdModalBasic {
    }
   if(this.cut ==='photo.php'){
    var idcut = arregloDeCadenas[3].substring(15, 100);
+
     var subcadena = idcut.split("&");
+
      this.likes1(subcadena[0]);
 
   }
@@ -161,14 +152,18 @@ export class NgbdModalBasic {
 
   }
 
-   computeq(number){
+   sendPublicate(id,usu,photos,urlss,type1){
+     this.socket.emit('set-nickname',id,usu,photos,this.notification,urlss,type1);
+     this.socket.on('users-changed', (data) => {
 
-     if(number<0)
-       return 0;
-     return number - 1 ;
-
+       this.cut= data;
+     });
+     return id;
 
   }
+
+
+
 
 }
 

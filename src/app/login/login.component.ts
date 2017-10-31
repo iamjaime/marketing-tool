@@ -60,6 +60,7 @@ export class LoginComponent implements OnInit  {
                        localStorage.setItem('name', this.user1.name);
                        localStorage.setItem('photo', this.user1.photoUrl);
                        localStorage.setItem('email', this.user1.email);
+
                        console.log(localStorage);
                        this.router.navigate(['/starter']);
 

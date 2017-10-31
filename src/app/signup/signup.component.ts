@@ -41,4 +41,6 @@ export class SignupComponent   {
          console.log(name,email,password);
 
      }*/
+
+
 }
