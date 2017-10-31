@@ -16,9 +16,9 @@ export class LoginComponent implements OnInit  {
 
     User:any;
     private user1: SocialUser;
-
+  AuthService:AuthService;
     private loggedIn: boolean;
-    constructor( public router: Router ,public  authService: AuthService, private socket: Socket ) {
+    constructor( public router: Router   ) {
 
 
 
@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit  {
 
     ngOnInit() {
 
-        this.authService.authState.subscribe((user) => {
+        this.AuthService.authState.subscribe((user) => {
             this.user1 = user;
             console.log(this.user1);
 
@@ -109,14 +109,16 @@ export class LoginComponent implements OnInit  {
 
 
     signInWithGoogle() {
-        this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
+        this.AuthService.signIn(GoogleLoginProvider.PROVIDER_ID);
 
       }
 
       signInWithFB(){
-        this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
+        this.AuthService.signIn(FacebookLoginProvider.PROVIDER_ID);
 
       }
+
+
   compute(number){
    if(number<0)
      return 0;
