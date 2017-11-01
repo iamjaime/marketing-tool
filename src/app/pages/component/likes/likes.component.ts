@@ -1,33 +1,17 @@
-import { Component, Injectable } from '@angular/core';
-import {Observable} from 'rxjs/Observable';
-import {Jsonp, URLSearchParams} from '@angular/http';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/distinctUntilChanged';
-import 'rxjs/add/observable/of';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/switchMap';
-import {   ViewEncapsulation } from '@angular/core';
-import {NgbModal, ModalDismissReasons, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import { FacebookService, UIParams, UIResponse } from 'ngx-facebook';
-import {  InitParams } from 'ngx-facebook';
+import { Component } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { FacebookService } from 'ngx-facebook';
+import { InitParams } from 'ngx-facebook';
 import * as io from 'socket.io-client';
 declare const FB: any;
 
-
-
-@Injectable()
- 
-
 @Component({
-	selector: 'ngbd-pagination',
-	templateUrl: './shared.component.html',
- 
+  selector: 'ngbd-modal',
+  templateUrl: './likes.component.html',
 })
 
-export class Shared{
+export class Likes {
+
   private socket: SocketIOClient.Socket;
   private urls = 'http://localhost:3001';
   photo:any;
@@ -74,7 +58,7 @@ export class Shared{
   /**
    * Handles Validate facebook url
    */
-  buy(urlface,posd){
+  buy(urlface,likesd){
     this.url  = urlface;
     var fragment = this.url.split("/");
     this.cut = fragment[3].substring(0, 9);
@@ -84,31 +68,31 @@ export class Shared{
     {
       var idcut = fragment[3].substring(15, 100);
       var subcadena = idcut.split("&");
-      this.getShareds(subcadena[0]);
+      this.getLikes(subcadena[0]);
     }
 
     if(fragment[3] === 'groups')
     {
-      this.getShareds(fragment[6]);
+      this.getLikes(fragment[6]);
     }
 
     if(this.cut === 'photo.php')
     {
       var idcut = fragment[3].substring(15, 100);
       var subcadena = idcut.split("&");
-      this.getShareds(subcadena[0]);
+      this.getLikes(subcadena[0]);
       return urlface;
     }
 
     if(fragment[4] === 'videos')
     {
-      this.getShareds(fragment[5]);
+      this.getLikes(fragment[5]);
       return urlface;
     }
 
     if(fragment[4] === 'photos')
     {
-      this.getShareds(fragment[6]);
+      this.getLikes(fragment[6]);
       return urlface;
     }
   }
@@ -118,7 +102,7 @@ export class Shared{
    */
   private facebookSocket(){
     let initParams: InitParams = {
-      appId:   '531968097138866',
+      appId:   this.id,
       xfbml: true,
       version: 'v2.10'
     };
@@ -127,25 +111,22 @@ export class Shared{
   }
 
   /**
-   * Handles get getShareds facebook
+   * Handles get likes facebook
    */
-   getShareds(idfacebook)
+  private getLikes(idfacebook)
   {
     this.facebookSocket();
     var FBfunction = function()
     {
-      FB.api(
-        '/'+idfacebook,
-        'GET',
-        {"fields":"sharedposts{from,name,description,full_picture,is_published,permalink_url,created_time},format"},
-        function(response) {
-          this.likes = response ;
-          console.log(this.likes);
-            // Insert your code here
+      FB.api( '/' + idfacebook, 'GET', {"fields": "likes.limit(1000000)"},
+        function (response)
+        {
+          this.likes = response.likes.data;
+          console.log(this.likes.splice(10));
         }
       );
     }
-    this.socket.emit('set-nickname',sessionStorage.getItem('id'),sessionStorage.getItem('name'),sessionStorage.getItem('photo'),'si', this.url,"Post" );
+    this.socket.emit('set-nickname',sessionStorage.getItem('id'),sessionStorage.getItem('name'),sessionStorage.getItem('photo'),'si', this.url,"like" );
     this.socket.on('users-changed', (data) => {  this.cut= data;  console.log(this.cut);  });
   }
 
@@ -158,6 +139,5 @@ export class Shared{
       this.cut= data;
     });
     return id;
-  } 
- 
+  }
 }

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
-import { NgbdtypeheadBasic } from './typehead.component';
+import { Comments } from './comments.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpModule, JsonpModule } from '@angular/http';
 const routes: Routes = [{
@@ -11,7 +11,7 @@ const routes: Routes = [{
       title: 'Facebook',
       urls: [{title:  'Home', url: '/starter'},{title: 'Facebook'},{title: 'Comments'}]
     },
-	component: NgbdtypeheadBasic
+	component: Comments
 }];
 
 @NgModule({
@@ -23,6 +23,6 @@ const routes: Routes = [{
       NgbModule.forRoot(),
     	RouterModule.forChild(routes)
     ],
-	declarations: [NgbdtypeheadBasic]
+	declarations: [Comments]
 })
-export class TypeheadModule { }
+export class CommentsModule { }

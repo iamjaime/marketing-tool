@@ -16,9 +16,9 @@ export class SidebarComponent implements AfterViewInit {
     constructor(private authService: AuthService,private router: Router) { }
 
     ngOnInit() {
-      this.photo =localStorage.getItem('photo');
-      this.name =localStorage.getItem('name');
-      this.email =localStorage.getItem('email');
+      this.photo =sessionStorage.getItem('photo');
+      this.name =sessionStorage.getItem('name');
+      this.email =sessionStorage.getItem('email');
         
             console.log(this.photo ); 
       }
@@ -45,8 +45,8 @@ export class SidebarComponent implements AfterViewInit {
     onLoggedout()  {
      
         this.authService.signOut();
-        localStorage.removeItem('id');
-        localStorage.clear();
+        sessionStorage.removeItem('id');
+        sessionStorage.clear();
         
         this.router.navigate(['/login']);
    }

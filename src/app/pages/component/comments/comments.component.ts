@@ -26,11 +26,11 @@ export class WikipediaService {
 
 @Component({
 	selector: 'ngbd-pagination',
-	templateUrl: './typehead.component.html',
+	templateUrl: './comments.component.html',
 	providers: [WikipediaService]
 })
 
-export class NgbdtypeheadBasic{
+export class Comments{
   private socket: SocketIOClient.Socket;
   private urls = 'http://localhost:3001';
   public notification='si';

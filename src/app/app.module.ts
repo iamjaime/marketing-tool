@@ -12,9 +12,6 @@ import { GoogleLoginProvider, FacebookLoginProvider } from "angular4-social-logi
 import { FacebookModule } from 'ngx-facebook';
 import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
 
-
-
-
 const config2: SocketIoConfig = { url: 'http://localhost:3001', options: {} };
 let config = new AuthServiceConfig([
   {

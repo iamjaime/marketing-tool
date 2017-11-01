@@ -3,7 +3,7 @@ import { ReactiveFormsModule } from '@angular/forms'
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
-import { NgbdModalBasic } from './modal.component';
+import { Likes } from './likes.component';
 
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -12,9 +12,9 @@ const routes: Routes = [{
 	path: '',
 	data: {
       title: 'Facebook',
-      urls: [{title: 'Dashboard', url: '/'},{title: 'ngComponent'},{title: 'Modal'}]
+      urls: [{title: 'Home', url: '/starter'},{title: 'Facebook'},{title: 'Likes'}]
     },
-	component: NgbdModalBasic
+	component: Likes
 }];
 
 
@@ -28,6 +28,6 @@ const routes: Routes = [{
       NgbModule.forRoot(),
     	RouterModule.forChild(routes),NgbModule.forRoot()
     ],
-	declarations: [NgbdModalBasic]
+	declarations: [Likes]
 })
-export class ModalModule { }
+export class LikesModule { }

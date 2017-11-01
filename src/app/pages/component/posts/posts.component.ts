@@ -30,124 +30,136 @@ export class WikipediaService {
 	providers: [WikipediaService]
 })
 
-export class NgbdpostsBasic{
+export class Post{
   private socket: SocketIOClient.Socket;
   private urls = 'http://localhost:3001';
-  closeResult: string;
   photo:any;
   name:any;
   email:any;
   id:any;
   likes:any;
-  public model: any;
-  idcut:any;
   url:any;
   cut:any;
-  enlace:any;
-  public notification='si';
-  ngOnInit() {
-    this.id =localStorage.getItem('id');
-    this.photo =localStorage.getItem('photo');
-    this.name =localStorage.getItem('name');
-    this.email =localStorage.getItem('email');
+  cute:any;
 
-
-
-    }
   constructor(private modalService: NgbModal, private modalService2: NgbModal,private fb: FacebookService) {
     this.socket = io(this.urls);
+  }
+
+  /**
+   * Handles get session data process
+   */
+  private ngOnInit(){
+    this.getDataSession();
+  }
+
+  /**
+   * Handles Authentication
+   */
+  private getDataSession() {
+    this.id = sessionStorage.getItem('id');
+    this.photo = sessionStorage.getItem('photo');
+    this.name = sessionStorage.getItem('name');
+    this.email = sessionStorage.getItem('email');
+  }
+
+  /**
+   * Handles show form
+   */
+  private send(content) {
+    this.modalService.open(content).result.then((result) => {
+      // this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  /**
+   * Handles Validate facebook url
+   */
+  buy(urlface,posd){
+    this.url  = urlface;
+    var fragment = this.url.split("/");
+    this.cut = fragment[3].substring(0, 9);
+    this.cute = fragment[3].substring(0, 14);
+
+    if(this.cute === 'photo.php?fbid')
+    {
+      var idcut = fragment[3].substring(15, 100);
+      var subcadena = idcut.split("&");
+      this.getPost(subcadena[0]);
+    }
+
+    if(fragment[3] === 'groups')
+    {
+      this.getPost(fragment[6]);
+    }
+
+    if(this.cut === 'photo.php')
+    {
+      var idcut = fragment[3].substring(15, 100);
+      var subcadena = idcut.split("&");
+      this.getPost(subcadena[0]);
+      return urlface;
+    }
+
+    if(fragment[4] === 'videos')
+    {
+      this.getPost(fragment[5]);
+      return urlface;
+    }
+
+    if(fragment[4] === 'photos')
+    {
+      this.getPost(fragment[6]);
+      return urlface;
+    }
+  }
+
+  /**
+   * Handles facebook credentials
+   */
+  private facebookSocket(){
     let initParams: InitParams = {
-      appId:  this.id,
+      appId:   '531968097138866',
       xfbml: true,
       version: 'v2.10'
     };
 
-    fb.init(initParams);
-
-
-
+    this.fb.init(initParams);
   }
 
-  open2(content) {
-    this.modalService.open(content).result.then((result) => {
-     // this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-     // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+  /**
+   * Handles get Posts facebook
+   */
+   getPost(idfacebook)
+  {
+    this.facebookSocket();
+    var FBfunction = function()
+    {
+      FB.api(
+        '/'+idfacebook,
+        'GET',
+        {"fields":"sharedposts{from,name,description,full_picture,is_published,permalink_url,created_time},format"},
+        function(response) {
+          this.likes = response ;
+          console.log(this.likes);
+            // Insert your code here
+        }
+      );
+    }
+    this.socket.emit('set-nickname',sessionStorage.getItem('id'),sessionStorage.getItem('name'),sessionStorage.getItem('photo'),'si', this.url,"Post" );
+    this.socket.on('users-changed', (data) => {  this.cut= data;  console.log(this.cut);  });
+  }
+
+  /**
+   * Handles send notification to connected clients
+   */
+  sendPublicate(id,usu,photos,urlss,type1){
+    this.socket.emit('set-nickname',id,usu,photos,'si',urlss,type1);
+    this.socket.on('users-changed', (data) => {
+      this.cut= data;
     });
-  }
-  open(content) {
-    this.modalService2.open(content, { windowClass: 'dark-modal' });
-  }
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return  `with: ${reason}`;
-    }
-  }
-  buy(Username,like){
-   // console.log('url:'+Username,'usuario:'+this.name,'like:'+like);
-   // window.open(Username, "nuevo", "directories=no, location=no, menubar=no, scrollbars=yes, statusbar=no, tittlebar=no, width=400, height=400");
-
-   this.url  = Username;
-
-  var arregloDeCadenas = this.url.split("/");
-
-  console.log("<br>El arreglo tiene " + arregloDeCadenas.length + " elementos: ");
-  console.log(arregloDeCadenas[4]);
-  this.cut = arregloDeCadenas[3].substring(0, 9);
-
-
-  if(arregloDeCadenas[3] ==='groups'){
-
-     this.likes1(arregloDeCadenas[6]);
-
-   }
-  if(this.cut ==='photo.php'){
-   var idcut = arregloDeCadenas[3].substring(15, 100);
-    var subcadena = idcut.split("&");
-     this.likes1(subcadena[0]);
-
-  }
-  // videos
-  if(arregloDeCadenas[4]==='videos'){
-     this.likes1(arregloDeCadenas[5]);
-  }
-  //photos
-  if(arregloDeCadenas[4]==='photos'){
-    this.likes1(arregloDeCadenas[6]);
-  }
-
-
-  /*for (var i=0; i < arregloDeCadenas.length; i++) {
-     console.log(arregloDeCadenas[i] + " / ");
-  } */
-
-}
-likes1(id){
-  FB.api(
-    '/'+id,
-    'GET',
-    {"fields":"sharedposts{from,name,description,full_picture,is_published,permalink_url,created_time},format"},
-    function(response) {
-      this.likes = response ;
-      console.log(this.likes);
-        // Insert your code here
-    }
-  );
-
-  this.socket.emit('set-nickname',localStorage.getItem('id'),localStorage.getItem('name'),localStorage.getItem('photo'),this.notification, this.url,"post" );
-  this.socket.on('users-changed', (data) => {
-
-    this.cut= data;
-
-
-    console.log(this.cut);
-
-
-  });
-
-   }
+    return id;
+  } 
 }
