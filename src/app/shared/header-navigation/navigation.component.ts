@@ -11,30 +11,48 @@ import { SocialUser } from "angular4-social-login";
   templateUrl: './navigation.component.html'
 })
 export class NavigationComponent implements AfterViewInit {
-	name:any;
-  	showHide:boolean;
-      photo:any; 
-      email:any; 
-  	constructor(private router: Router,private authService: AuthService) {
-    	this.showHide = true;
-  	}
-      ngOnInit() {
-        this.photo =localStorage.getItem('photo');
-        this.name =localStorage.getItem('name');
-        this.email =localStorage.getItem('email');
-          
-              console.log(this.photo ); 
-        }
-  	changeShowStatus(){
-    	this.showHide = !this.showHide;
-  	}
-     
-      onLoggedout(): void {
-        this.authService.signOut();
-        localStorage.removeItem('id');
-        localStorage.clear(); 
-        this.router.navigate(['/login']);
+
+  name:any;
+  showHide:boolean;
+  photo:any;
+  email:any;
+
+
+  constructor(private router: Router,private authService: AuthService) {
+    this.showHide = true;
+  }
+
+  ngOnInit() {
+    if(sessionStorage.getItem('id')){
+      this.photo = sessionStorage.getItem('photo');
+      this.name = sessionStorage.getItem('name');
+      this.email = sessionStorage.getItem('email');
+      console.log(this.photo );
     }
+  }
+
+
+  changeShowStatus(){
+    this.showHide = !this.showHide;
+  }
+
+
+  /**
+   * Handles signing out of system.
+   */
+  signOut(): void {
+        this.authService.signOut().then(
+          (res) => {
+            //If the promise returned success....
+            this.router.navigate(['/login']);
+          },
+          (err) => {
+            console.log(err);
+          }
+        );
+    }
+
+
     ngAfterViewInit() {
 
         $(function () {
@@ -67,11 +85,11 @@ export class NavigationComponent implements AfterViewInit {
         $(document).on('click', '.mega-dropdown', function (e) {
             e.stopPropagation();
         });
-        
+
         $(".search-box a, .search-box .app-search .srh-btn").on('click', function () {
             $(".app-search").toggle(200);
         });
-        
+
         (<any>$('.scroll-sidebar, .right-sidebar, .message-center')).perfectScrollbar();
 
         $("body").trigger("resize");
