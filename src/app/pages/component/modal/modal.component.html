@@ -3,54 +3,35 @@
         <div class="card">
             <div class="card-body">
                 <h3 class="card-title">
-
 									<i class="fa fa-thumbs-o-up fa-2x" aria-hidden="true"></i>Buy Likes</h3>
 								<h6 class="card-subtitle">This is a link pack for publication</h6>
 								<form action="">
                 <ng-template #content let-c="close" let-d="dismiss">
-				  <div class="modal-header">
-
-						<h3 class="card-title"><img src="{{photo}}"  style="width: 30px; height: 30px; border-radius: 150px; -webkit-border-radius: 150px; -moz-border-radius: 150px;" />{{name}}</h3>
-				    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-				      <span aria-hidden="true">&times;</span>
-				    </button>
-				  </div>
-				  <div class="modal-body">
-
-						<div class="form-group">
-								<h4 class="modal-title">	<i class="fa fa-thumbs-o-up fa-2x" aria-hidden="true"></i> Buy Likes</h4>
-
-								<label for="firstName1">Facebook URL to like:</label>
-
-								<input #Username ng-model="Username" type="text" id="Username" class="form-control"  placeholder="http:// url facebook" required/> </div>
-
-
-
- <br>
-							 	<label for="firstName1">Number of Likes:</label>
-								<input #like ng-model="like" type="number" id="like" class="form-control"  placeholder="example 10" required/> </div>
-
-								<div class="form-group">
-						  </div>
-				  <div class="modal-footer">
-						<button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
-						<button type="button" class="btn btn-secondary" (click)="buy(Username.value,like.value)">Buy Now</button>
-
-
-					</div>
-
-
-				</ng-template>
-			</form>
-				<button class="btn btn-lg   " style="color:antiquewhite ;background-color: #187BFD" (click)="open2(content)">0.00057 BTC</button>
-
-
-
-
+                  <div class="modal-header">
+                    <h3 class="card-title"><img src="{{photo}}"  style="width: 30px; height: 30px; border-radius: 150px; -webkit-border-radius: 150px; -moz-border-radius: 150px;" />{{name}}</h3>
+                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="form-group">
+                        <h4 class="modal-title">	<i class="fa fa-thumbs-o-up fa-2x" aria-hidden="true"></i> Buy Likes</h4>
+                        <label for="firstName1">Facebook URL to like:</label>
+                        <input #Username ng-model="Username" type="text" id="Username" class="form-control"  placeholder="http:// url facebook" required/>
+                    </div>
+                        <br>
+                        <label for="firstName1">Number of Likes:</label>
+                        <input #like ng-model="like" type="number" id="like" class="form-control"  placeholder="example 10" required/>
+                  </div>
+                  <div class="form-group">  </div>
+                  <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+                  <button type="button" class="btn btn-secondary" (click)="buy(Username.value,like.value)">Buy Now</button>
+                  </div>
+				        </ng-template>
+			          </form>
+				      <button class="btn btn-lg   " style="color:antiquewhite ;background-color: #187BFD" (click)="send(content)">0.00057 BTC</button>
             </div>
         </div>
 		</div>
-		<!--<iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2F375898239464051%2Fvideos%2F409093759477832%2F&show_text=0&width=266" width="266" height="476" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
-
-		-->
-	</div>
+</div>
